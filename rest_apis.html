@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>REST APIs Today and Tomorrow -- an essay</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(//fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(//fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+      .red { color: red; }
+
+      blockquote { background-color: lightgray; font-family: serif; }
+
+      img { max-width: 100%; }
+
+      small { font-size: 70%; }
+
+      iframe { width: 100%; height: 25em; }
+
+      table { border-collapse: collapse; }
+
+      table td { border: 1px solid black; padding: 0.2em; }
+
+      /* Two-column layout */
+      .left-column {
+        width: 48%;
+        height: 92%;
+        float: left;
+      }
+
+      .right-column {
+        width: 48%;
+        float: right;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# REST APIs Today and Tomorrow
+## an Essay
+
+Thomas Hoppe in 2015
+
+---
+
+# Contents
+
+1. Relevance of Web APIs
+2. History of distributed System Integration Paradigms
+3. What actually is REST?
+4. The Semantic Web
+5. Linked Data
+6. JSON-LD
+7. Hydra Core
+
+---
+
+class: center, middle
+
+# Relevance of Web APIs
+
+---
+
+# Relevance of Web APIs
+
+**API First!**
+<br>
+<small>
+It's no longer Web first or mobile first.
+</small>
+
+<br><br>
+**We live in an _API Economy_.** [1][1]
+
+<br><br>
+**The _Chief API Officer_ term is coined.** [2][2]
+
+<br><br>
+**If it's not programmable, it doesn't exist.**
+<br>
+<small>
+by me :)
+</small>
+
+
+[1]: http://www.forbes.com/sites/ciocentral/2012/08/29/welcome-to-the-api-economy/
+[2]: http://www.citeworld.com/article/2115558/development/chief-api-officer.html
+---
+
+class: center, middle
+
+# History of distributed System Integration Paradigms
+
+---
+
+# Non-scientific enumeration of past Hypes
+
+- Integrated via asynchronous messaging (MQ).
+  - Popular when mainframes were hip.
+
+- Remote Procedure Calls (RPC).
+  - Often with CORBA as a protocol.
+
+- Service Oriented Architecture (SOA).
+  - Still popular in enterprise IT but irrelevant for mobile computing.
+  - Although not mandated, the integration protocol of choice in SOAs is/ was SOAP/HTTP and SOAP via asynchronous protocols.
+
+- Pseudo-REST APIs ‒ <span class="red">today<span>.
+  - "pseudo" because they do not fulfill all of the commonly accepted criteria of a REST API.
+
+---
+
+# Prospected Future
+
+- REST APIs ‒ **approaching**.
+
+- Semantic REST APIs ‒ **future**.
+
+Both are further elaborated below.
+
+---
+
+# SOA vs. REST (1/2)
+
+Google trends for the terms _SOAP API_ and _REST API_:
+
+<iframe src="//www.google.com/trends/fetchComponent?hl=en-US&amp;q=soap+api,+rest+api&amp;cmpt=q&amp;content=1&amp;cid=TIMESERIES_GRAPH_0&amp;export=5&amp;w=650&amp;h=330" style="border: none;" height="330" width="650"></iframe>
+
+<small>Generally a weak comparision, yes, but is significant for our purpose.</small>
+
+---
+
+# SOA vs. REST (2/2)
+
+In one of the largest independent and publicly available directories for APIs, the Programmableweb,
+the share of Internet APIs by technology in March 2014 is:
+
+![API protocols](http://www.bogotobogo.com/WebTechnologies/images/OpenAPI_RESTful/API_Protocols.png)
+
+REST (69%), SOAP (18%), JavaScript (5%), and XML-RPC (2%).
+
+<!--
+# REST is still on the Rise
+http://de.slideshare.net/programmableweb/web-api-growthsince2005
+-->
+
+---
+
+# Qualitative Advantages of REST over SOAP
+
+- Developers like REST because the learning curve is less steep.
+  - Web Services' contract first appraoch (early binding) is more complex.
+  - It requires a longer/ deeper toolchain to be equally productive.
+
+- Better client support in most languages.
+  - SOAP clients for PHP and NodeJS are still not on par with Java.
+
+- The whole footprint of SOAP is too big for mobile.
+  - Parsing of JSON is less compute and memory intensive than XML.
+  - Required technology stack is more complex.
+
+---
+
+# Conclusions
+
+1. We saw an exponential growth of the number of offered WEB APIs.
+
+2. In the future of distributed systems computing, most likely only REST and SOA will be relevant
+for distributed system integration.
+
+3. SOAP will persist for specialized enterprise
+interfaces as part of SOAs and in B2B scenarios.
+
+---
+
+class: center, middle
+
+# What actually is REST?
+
+---
+
+# The Beginning
+
+- **2000:** The doctoral dissertation from Roy Fielding is commonly reckoned as the manifesto of the REST API vision.
+
+<iframe src="http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm"></iframe>
+
+---
+
+# A Definition
+
+###  <span class="red">Re</span>presentational <span class="red">S</span>tate <span class="red">T</span>ransfer.
+
+> REST is an architectural style consisting of a coordinated set of architectural constraints applied to components,
+connectors, and data elements, within a distributed hypermedia system.
+<br><small>‒ http://en.wikipedia.org/wiki/Representational_state_transfer</small>
+
+
+<br>
+“Representation”: A way of formatting/ serializing a resource, such as JSON, HTML, PNG.
+
+---
+
+# What REST isn't / what you can't do with it
+
+- It's not a product → you cannot buy it.
+
+- It is not a (Web) standard.
+
+- It's not a protocol or about a single protocol (HTTP).
+
+- There is no reference implementation.
+
+---
+
+# The Past Drivers
+
+- **2006:** API pioneers eBay, Amazon and Google Maps were among the first to offer popular Web APIs.
+
+- **2007:** The mobile revolution kicked of by smart phones.
+
+- **2013:** Mobile and infotainment platforms diversity (Jolla, BB10, Tizen, Ubuntu, WP, FF OS, Android...).
+
+# Future Drivers
+
+- **2015+:** Babylonic language diversity (Only some newer ones: Rust, Go, Dart).
+
+<!--
+developers like SDKs but is it realistic for an API provider to offer an SDK for `n` languages?
+-->
+- **2016+:** Internet of things (vehicles, household appliances, ...every power plug).
+  - 15B connected devices in 2015, 40B connected devices in 2020.
+
+---
+
+# REST Constraints (1/2)
+
+The essence of Fieldings thesis is the following series of constraints:
+
+- Client-server.
+
+  <small>
+  _separation of concerns_ — A clean separation of duty exists between client and server;
+  server is responsible for data processing and persistence, client to drive the interation.
+  </small>
+
+- Stateless.
+
+  <small>
+  Server must only use the data in a request to service it; no further context info.
+  </small>
+
+- Cacheable.
+
+  <small>
+  The data within a response to a request must be implicitly or explicitly labeled as cacheable or non-cacheable.
+  </small>
+
+- Layered system.
+
+  <small>
+  Servers do not know whether there are layers of abstraction between themselves and the end client.
+  </small>
+
+<!--
+http://kellabyte.com/2011/09/04/clarifying-rest/
+http://en.wikipedia.org/wiki/Representational_state_transfer
+http://www.pwc.com/us/en/technology-forecast/2012/issue2/features/feature-consumerization-apis.jhtml
+-->
+
+---
+
+# REST Constraints (2/2)
+
+- Code on demand (optional).
+
+  <small>
+  Servers can temporarily extend or customize the functionality of a client by the transfer of executable code.
+  </small>
+
+- Uniform interface:
+
+  - Identification of resources (not a representation).
+
+  <small>
+  Individual resources are identifiable with a GUID.
+  </small>
+
+  - Manipulation via representations.
+
+  <small>
+  Possible interactions can be introspected.
+  </small>
+
+  - Self descriptive messages.
+
+  <small>
+  A resource can be understood syntactucally and semantically from the carried data and meta-data.
+  </small>
+
+  - Hypermedia as the engine of application state (HATEOAS).
+
+  <small>
+  Clients make state transitions only through actions that are dynamically identified within hypermedia by the server.
+  </small>
+
+---
+
+# The Hypermedia Constraint (1/2)
+
+- is often-overlooked; ~99% of existing APIs don't do this right,
+
+- is not particularly easy to achieve as it requires quite some effort (and a smart client),
+
+- is the main enabler for the _loose coupling_ principle.
+
+---
+
+# The Hypermedia Constraint (2/2)
+
+Consider that an API client can be modelled as a state machine.
+
+The hypermedia constraint says that the client must be able to use the API
+without knowing this state machine at design time.
+
+Consequence: Resources must describe their
+- Relations,
+
+- Affordances (possible operations).
+
+---
+
+# Client State Machine Example
+
+<img style="max-width: 80%;" src="https://docs.google.com/drawings/d/1qjYy-MAiUOslhLPDZLuJCjjukyyyVdPWSxevPsjOuhY/pub?w=960&amp;h=720" alt="Client App State Machine">
+
+<small>http://www.programmableweb.com/news/hypermedia-apis-benefits-hateoas/how-to/2014/02/27</small>
+
+<!--
+See also:
+https://www.arangodb.com/2014/12/02/building-hypermedia-apis-design
+-->
+
+---
+
+# But what is all this good for?
+
+Put in some quotes:
+
+<br>
+
+> A REST API is just a Web site for users with a limited vocabulary.
+<br><small>‒ Roy Fielding in 2013</small>
+
+<br>
+<br>
+
+> You are the most advanced API client while using your browser.
+We need to enable machines acting on your behalf to acomplish
+the same tasks through future APIs.
+<br><small>‒ Thomas Hoppe, 2015</small>
+
+<br>
+<br>
+
+---
+
+# What we gain from real REST
+
+Put in hard facts:
+
+- URLs can change without breaking clients,
+- Resource representations can change in terms of:
+  - Granularity,
+  - Affordances,
+  - Relations.
+
+__→ Client and Server can evolve independently.__
+
+- Discoverability,
+- Performance through cacheability.
+
+---
+
+# The ultimate Test
+
+Provide an API client with just the __entry point__ of your API.
+If this is sufficient for the client to use the API in its entirety,
+the API adheres to at least a good subset of the REST constraints.
+
+And the client is a proper REST client.
+
+---
+
+# What do pseudo REST APIs wrong?
+
+In the case of HTTP based REST:
+
+- Interact only with a single endpoint instead of resources.
+- Use HTTP as tunneling protocol.
+  - RPCish interaction (command messages) interaction.
+- No hypermedia, no HATEOAS.
+  - Assumptions about available representations and transitions are hard-coded (or configured).
+- Stateful communication.
+- Resources/ messages/ data is not self-descriptive.
+- Appropriate HTTP methods are not used; e. g. only GET.
+- Content negotiation is not used.
+- Proper HTTP response codes are not provided/ interpreted.
+
+<!--
+See RMM
+http://martinfowler.com/articles/richardsonMaturityModel.html
+-->
+
+---
+
+# Versioning
+
+> Versioning an interface is just a polite way to kill deployed applications
+<br><small>‒ Roy Fielding in 2013</small>
+
+When did you see a version last time on a Web site?
+
+---
+
+# Notable Qualities about HTTP Methods
+
+Read only:
+- GET,
+- HEAD,
+- OPTIONS.
+
+Idempotent:
+- PUT,
+- DELETE.
+
+Potentially idempotent:
+- POST.
+
+---
+
+# So aren't there existing approaches?
+
+Sure, here are a few media types which are at least hypermedia-aware:
+
+- HAL <small>http://stateless.co/hal_specification.html</small>.
+- SIREN <small>https://github.com/kevinswiber/siren</small>.
+- SVG, Atom, (X)HTML(!).
+- JSON Hyper-Schema <small>http://json-schema.org/</small>.
+- JSON API <small>http://jsonapi.org/</small>.
+- UBER Hypermedia <small>http://uberhypermedia.org/</small>.
+
+<small>Note: JSON itself is not hypermedia-aware.</small>
+
+My conclusion about them is, however, that most of them only address
+the hypermedia issue but all of them lack at least on of the following features:
+
+- Describing complex affordances like contextual actions/ operations.
+- Provide a possbility to represent data really in a self-descripive manner.
+
+→ Let's see whether we can do better.
+
+---
+
+class: center, middle
+
+# The Semantic Web
+
+---
+
+# Ehrrm, isn't this long time dead?!
+
+In the form which has been procalimed for decades ‒ probably yes.
+
+![Semantic Web Logo](http://bloghelpline.com/wp-content/uploads/2013/09/Logo_Semantic_Web.png)
+
+---
+
+# The Semantic Web technology Stack
+
+![Semantic Web Logo](http://bnode.org/media/2009/07/08/semantic_web_technology_stack.png)
+
+---
+
+# So what were the Issues?
+
+- Complexity (full stack including ontologies).
+
+- No comprehensible value add.
+
+- Triplestores:
+  - immature,
+  - slow,
+  - only few implementations (very few commercial).
+
+- SPARQL:
+  - complex,
+  - few implementations,
+  - inappropriate for many real-world problems.
+
+- No killer application.
+  - For a long time it was a rather academic topic.
+
+---
+
+# RDF
+
+<span class="red">R</span>esource <span class="red">D</span>escription <span class="red">F</span>ramework.
+
+- Effectively a data model for labeled, directed multi-graphs.
+
+- There is a variety of serialization formats
+(e. g. RDF/XML, N3, Turtle, N-Triples, JSON-LD).
+
+- Consists of statements about “things” (Web resources)
+in the form of subject-predicate-object expressions, also known as triples.
+  - Statements can describe facts with literals,
+
+  - and interrelations to other things.
+
+<!--
+http://www.uni-weimar.de/medien/webis/teaching/lecturenotes/web-technology/unit-de-semantic-web-rdfs.pdf
+-->
+---
+
+# RDF Examples
+
+<small>
+With literals / or in natural language:
+
+| Subject           | Predicate        | Object                             |
+|-------------------|------------------|------------------------------------|
+| Thomas Hoppe      | is interested in | REST                               |
+
+
+With identifiable resources/ relations:
+
+| Subject           | Predicate        | Object                             |
+|-------------------|------------------|------------------------------------|
+| th:               | foaf:interest    | wp:Representational_state_transfer |
+
+
+With multiple statements:
+
+| Subject           | Predicate              | Object                             |
+|-------------------|------------------------|------------------------------------|
+| th:               | foaf:interest          | wp:Representational_state_transfer |
+| th:               | foaf:firstName         | Thomas                             |
+| th:               | foaf:lastName          | Hoppe                              |
+| th:               | foaf:workplaceHomepage | http://www.n-fuse.de               |
+</small>
+
+Prefixes:
+
+<small>
+foaf: http://xmlns.com/foaf/0.1/<br>
+th:   http://thomashoppe.me<br>
+wp:   http://en.wikipedia.org/wiki/<br>
+</small>
+
+---
+
+# Some Definitions
+
+“Resource”: A uniquely identifiable thing, typically identified by an IRI.
+
+“Subject”: The resource a statement is about.
+
+“Predicate”: A term used to describe or modify some aspect of the subject.
+Usually it denotes relationships between the subject and the object.
+
+“Object”: In English the object of a sentence is the thing that the verb is
+acting upon. In RDF, it’s the “target” or “value” of the triple.
+
+“Literal”: Can be untyped i. e. just a string or can be typed.
+The types are again just RDF resources. It is, however, recommeded to use
+XSD types such as `http://www.w3.org/2001/XMLSchema#int` whenever possible.
+Untyped literals can in addition have an optional language tag.
+
+<!--
+information resource - A resource for which all essential characteristics can be transmitted in a message (i.e. a digital resource). Historically, information resources have been the primary focus of the Web. When most users enter a URL into a web browser, they assume that the result will be the return of an information resource in the form of a digital file. Examples: html web page, digital image, pfd file.
+non-information resource - A resource that cannot be transmitted electronically. Non-information resources can be further subdivided into the following categories:
+
+    - physical resource - a material thing. Examples: an animal, a specimen, a 35 mm slide
+    - abstract resource - a non-material, non-electronic thing. Examples: a taxonomic concept, a relationship, a determination
+-->
+---
+
+# Potential Values of Triple Elements
+
+__Subject__: Only resources.
+
+__Predicate__: Only resources.
+
+__Object__: Resource or literals.
+
+---
+
+# Vocabularies
+
+__Goal__: Establish common, shared terms for a domain.
+
+__Comprising__:
+
+- Individuals (instances, objects),
+- Classes (concepts, types),
+- Properties (relations, roles),
+- Rules (axioms)
+
+There are multiple vocabularies, to define vocabularies such as RDFS and OWL.
+
+If they are rather complex (meany), they are also called _ontologies_.
+
+Technically they are nothing else than a bunch of RDF resources which
+are mostly used as predicates in other RDF resources.
+
+<!--
+http://www.w3.org/standards/semanticweb/ontology
+-->
+
+---
+
+# Some Established Vocabularies
+
+.left-column[
+<small>
+- rdf       http://www.w3.org/1999/02/22-rdf-syntax-ns#
+- rdfs      http://www.w3.org/2000/01/rdf-schema#
+- xsd       http://www.w3.org/2001/XMLSchema#
+- owl       http://www.w3.org/2002/07/owl#
+- skos      http://www.w3.org/2004/02/skos/core#
+- dir       http://dir.w3.org/directory/schema#
+- org       http://www.w3.org/ns/org#
+- rov       http://www.w3.org/ns/regorg#
+- dct       http://purl.org/dc/terms/
+- http      http://www.w3.org/2011/http#
+- httph     http://www.w3.org/2011/http-headers#
+- hydra     http://www.w3.org/ns/hydra/core#
+- cc        http://creativecommons.org/ns#
+- foaf      http://xmlns.com/foaf/0.1/
+- sioc      http://rdfs.org/sioc/ns#
+- geo       http://www.w3.org/2003/01/geo/wgs84_pos#
+- gn        http://www.geonames.org/ontology#
+</small>
+]
+.right-column[
+<small>
+- og        http://ogp.me/ns#
+- gr        http://purl.org/goodrelations/v1#
+- xro       http://purl.org/xro/ns#
+- dbo       http://dbpedia.org/ontology/
+- schema    http://schema.org/
+- tzont     http://www.w3.org/2006/timezone#
+- lingvo    http://www.lingvoj.org/ontology#
+- lvont     http://lexvo.org/ontology#
+- vs        http://www.w3.org/2003/06/sw-vocab-status/ns#
+- pto       http://www.productontology.org/id/
+- vann      http://purl.org/vocab/vann/
+- prov      http://www.w3.org/ns/prov#
+- doap      http://usefulinc.com/ns/doap#
+- voaf      http://purl.org/vocommons/voaf#
+- void      http://rdfs.org/ns/void#
+- adms      http://www.w3.org/ns/adms#
+</small>
+]
+
+---
+
+class: center, middle
+
+# Linked Data
+
+---
+
+# Linked Data
+
+- It's about tings and their relations, not about documents.
+
+- For me something like the second take on the Semantic Web.
+
+- Still based on RDF and co.
+
+- Ultimate objective: Make the Web a single database.
+
+<small>
+More:
+- https://www.youtube.com/watch?v=4x_xzT5eF5Q
+</small>
+
+---
+
+# Linked Data Objective (1/2)
+
+To get from a Web of documents...
+
+![Web of Documents](http://www.bbc.co.uk/staticarchive/533355da9de4faf21572098cf6aafa5a97795bce.png)
+
+<small>http://www.bbc.co.uk/staticarchive/533355da9de4faf21572098cf6aafa5a97795bce.png</small>
+
+<!--
+- Degree of structure in data: fairly low
+- Designed for: human consumption
+-->
+
+---
+
+# Linked Data Objective (2/2)
+
+...to a Web of data (facts and relations).
+
+![Web of Data](http://www.bbc.co.uk/staticarchive/392887acaaad47e534390f2c7d3910f2bf380a2e.png)
+
+<small>http://www.bbc.co.uk/staticarchive/392887acaaad47e534390f2c7d3910f2bf380a2e.png</small>
+
+<!--
+- Primary objects: “things” (or description of things)
+- Links between “things”
+- Degree of Structure: High (based on RDF data model)
+- Explicit semantics of contents and links
+- Designed for: Both machines and humans
+-->
+
+---
+
+# Linked Data Principes
+
+1. Use **URIs to denote things**.
+
+2. Use **HTTP URIs** so that these things can be referred to and **looked up** ("dereferenced") by people and user agents.
+
+3. **Provide useful information about the thing when its URI is dereferenced**, leveraging standards such as RDF, SPARQL.
+
+4. Include **links to other related things** (using their URIs) when publishing data on the Web.
+
+<small>Tim Berners-Lee, 2006<small>
+
+---
+
+# URLs, URIs, IRIs WTF?
+
+- In the past, the Semantic Web was all about URIs.
+
+- In 2005 they made they gained unicode support with IRIs.
+
+- URLs are just URIs/ IRIs which can be dereferenced.
+
+---
+
+# Linked Data Components
+
+- URIs (specifically, of the dereferenceable variety).
+
+- HTTP.
+
+- Resource Description Framework (RDF).
+
+- Serialization formats (RDFa, RDF/XML, N3, Turtle, JSON-LD, and others).
+
+---
+
+class: center, middle
+
+# JSON-LD
+
+---
+
+# JSON-LD
+
+<span class="red">JSON</span> <span class="red">L</span>inked <span class="red">D</span>ata; a serialization format for RDF.
+
+> The desire for __better Web APIs__ is what motivated the creation of JSON-LD, not the Semantic Web.
+If you want to make the Semantic Web a reality, stop making the case for it and spend your
+time doing something more useful, like actually making machines smarter
+or helping people publish data in a way that’s useful to them.
+<br><small>‒ Manu Sporny [JSON-LD and why I hate the Semantic Web](http://manu.sporny.org/2014/json-ld-origins-2/)</small>
+
+---
+
+# Currently in _Recommendation_ state
+
+<iframe src="http://www.w3.org/TR/json-ld/"></iframe>
+
+---
+
+# JSON-LD by Example (1/2)
+
+Plain JSON:
+
+````
+{
+  "id": "http://thomashoppe.me",
+  "firstName": "Thomas",
+  "lastName": "Hoppe",
+  "workplaceHomepage": "http://www.n-fuse.de"
+}
+````
+
+JSON-LD:
+
+````
+{
+  "@id": "http://thomashoppe.me",
+  "http://xmlns.com/foaf/0.1/firstName": "Thomas",
+  "http://xmlns.com/foaf/0.1/lastName": "Hoppe",
+  "http://xmlns.com/foaf/0.1/workplaceHomepage": "http://www.n-fuse.de"
+}
+````
+
+---
+
+# JSON-LD by Example (2/2)
+
+Using an `@context` to shorten things and typing it using `@type`:
+
+````
+{
+  "@context": {
+    "id": "@id",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "firstName": "foaf:firstName",
+    "lastName": "foaf:lastName",
+    "workplaceHomepage": "foaf:workplaceHomepage"
+  },
+  "@type": "foaf:Person",
+  "id": "http://thomashoppe.me",
+  "firstName": "Thomas",
+  "lastName": "Hoppe",
+  "workplaceHomepage": "http://www.n-fuse.de"
+}
+````
+
+The `@context` can also be announced with an appropriate header:
+
+<small>
+`Link: <http://thomashoppe.me/person.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"`
+</small>
+
+---
+
+# Polymorphy of JSON-LD and Compaction
+
+JSON documents __1__ & __2__ are semantically equivalent:
+
+__1:__
+
+````
+{
+  "@id": "http://thomashoppe.me",
+  "http://xmlns.com/foaf/0.1/firstName": "Thomas"
+}
+````
+
+__2:__
+
+````
+{
+  "@context": {
+    "id": "@id",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "firstName": "foaf:firstName"
+  },
+  "id": "http://thomashoppe.me",
+  "firstName": "Thomas"
+}
+````
+
+I can transform 1 into 2 with the `@context` of 2 and the JSON-LD
+__compaction__. See
+[playground example](http://json-ld.org/playground/index.html#startTab=tab-compacted&json-ld=%7B%22%40id%22%3A%22http%3A%2F%2Fthomashoppe.me%22%2C%22http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2FfirstName%22%3A%22Thomas%22%7D&context=%7B%22id%22%3A%22%40id%22%2C%22foaf%22%3A%22http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%22%2C%22firstName%22%3A%22foaf%3AfirstName%22%7D).
+
+---
+
+# Declaring Links in JSON-LD
+
+````
+{
+  "@context": {
+    ...
+    "workplaceHomepage": {
+      "@type": "@id",
+      "@id": "foaf:workplaceHomepage"
+    }
+  },
+  ...
+  "workplaceHomepage": "http://www.n-fuse.de"
+}
+````
+
+<br>
+Effectively, this declares that the value of the `workplaceHomepage` property
+is a resource.
+
+
+<!--
+The effect in N-Quads:
+
+````
+_:b0 <foaf:workplaceHomepage> <http://www.n-fuse.de> .
+
+vs. without @id
+
+_:b0 <foaf:workplaceHomepage> "http://www.n-fuse.de" .
+````
+-->
+---
+
+# More about JSON-LD
+
+- https://www.youtube.com/watch?v=vioCbTo3C-4
+
+- http://de.slideshare.net/lanthaler/building-next-generation-web-ap-is-with-jsonld-and-hydra?next_slideshow=1
+
+- http://json-ld.org/playground/
+
+---
+
+class: center, middle
+
+# Hydra Core
+
+---
+
+# About ![Hydra Core Logo](http://www.hydra-cg.com/img/logo.svg) Core
+
+Hydra is a vocabulary to describe hypermedia-driven Web APIs created by
+[Markus Lanthaler](http://www.markus-lanthaler.com/).
+
+It provides the following API primitives:
+
+- Entry point,
+- Resource (through RDFS),
+- Link (through JSON0-LD),
+- Affordance (operation),
+- Collection of resources (incl. paging),
+- API documentation,
+- Free text query,
+- etc.
+
+---
+
+# Currently in _Unofficial Draft_ state
+
+<iframe src="http://www.hydra-cg.com/spec/latest/core/"></iframe>
+
+---
+
+# Hydra Core by Example (1/2)
+
+Paged collection:
+
+````
+{
+  "@context": "http://www.w3.org/ns/hydra/context.jsonld",
+  "@id": "http://api.example.com/users/?page=3",
+  "@type": "PagedCollection",
+  "totalItems": "4980",
+  "itemsPerPage": "10",
+  "firstPage": "/users/?page=1",
+  "nextPage": "/users/?page=4",
+  "previousPage": "/users/?page=2",
+  "lastPage": "/users/?page=498",
+  "member": [
+    ... the members of this PagedCollection ...
+  ],
+  "me": "/users/?me"
+}
+````
+
+---
+
+# Hydra Core by Example (2/2)
+
+Operations:
+
+````
+{
+  "@context": "http://www.w3.org/ns/hydra/context.jsonld",
+  "@id": "http://api.example.com/an-issue/comments?page=3",
+  "@type": "PagedCollection",
+  ...
+  "member": [
+    ... the members of this PagedCollection ...
+  ],
+  "operation": [
+    {
+      "@type": "AppendResourceOperation",
+      "method": "POST",
+      "expects": "User"
+    }
+  ]
+}
+````
+
+---
+
+# More about Hydra Core
+
+Intro:
+
+http://de.slideshare.net/lanthaler/the-web-is-changing-from-strings-to-things
+
+---
+
+class: center, middle
+
+# The Web 3.0 is just around the corner
+
+and with this stuff you can be part of it.
+
+---
+
+class: center, middle
+
+# Thank you
+
+<br>
+
+<small>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+  <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />
+  This work is licensed under a <br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+  Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+</a>.
+<small>
+    </textarea>
+    <script src="//gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
+
+<!--
+- Netzwerk und Lokationstransparenz
+- Interoperabilität
+- Konsistenz
+- Lose Kopplung
+- Introspektion
+- Auffindbarkeit
+- Fehlersignalisierung
+- Skalierbarkeit
+- Sicherheit
+- Einfache Erlern- und Nutzbarkeit
+-->
