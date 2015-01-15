@@ -228,7 +228,7 @@ connectors, and data elements, within a distributed hypermedia system.
 
 - **2006:** API pioneers eBay, Amazon and Google Maps were among the first to offer popular Web APIs.
 
-- **2007:** The mobile revolution kicked of by smart phones.
+- **2007:** The mobile revolution kicked off by smart phones.
 
 - **2013:** Mobile and infotainment platforms diversity (Jolla, BB10, Tizen, Ubuntu, WP, FF OS, Android...).
 
@@ -306,7 +306,7 @@ http://www.pwc.com/us/en/technology-forecast/2012/issue2/features/feature-consum
   - Self descriptive messages.
 
   <small>
-  A resource can be understood syntactucally and semantically from the carried data and meta-data.
+  A resource can be understood syntactically and semantically from the carried data and meta-data.
   </small>
 
   - Hypermedia as the engine of application state (HATEOAS).
@@ -367,7 +367,7 @@ Put in some quotes:
 <br>
 
 > You are the most advanced API client while using your browser.
-We need to enable machines acting on your behalf to acomplish
+We need to enable machines acting on your behalf to accomplish
 the same tasks through future APIs.
 <br><small>‒ Thomas Hoppe, 2015</small>
 
@@ -403,7 +403,7 @@ And the client is a proper REST client.
 
 ---
 
-# What do pseudo REST APIs wrong?
+# What do pseudo REST APIs do wrong?
 
 In the case of HTTP based REST:
 
@@ -583,10 +583,9 @@ Usually it denotes relationships between the subject and the object.
 “Object”: In English the object of a sentence is the thing that the verb is
 acting upon. In RDF, it’s the “target” or “value” of the triple.
 
-“Literal”: Can be untyped i. e. just a string or can be typed.
+“Literal”: Are always typed, defaulting to string.
 The types are again just RDF resources. It is, however, recommeded to use
 XSD types such as `http://www.w3.org/2001/XMLSchema#int` whenever possible.
-Untyped literals can in addition have an optional language tag.
 
 <!--
 information resource - A resource for which all essential characteristics can be transmitted in a message (i.e. a digital resource). Historically, information resources have been the primary focus of the Web. When most users enter a URL into a web browser, they assume that the result will be the return of an information resource in the form of a digital file. Examples: html web page, digital image, pfd file.
@@ -603,7 +602,18 @@ __Subject__: Only resources.
 
 __Predicate__: Only resources.
 
-__Object__: Resource or literals.
+__Object__: Resources or literals.
+
+---
+
+# Text Localization in RDF
+
+- RDF has the concept of text localization baked in!
+
+- Since RDF 1.1 `rdf:langString` is the date type for localized literals.
+
+- [BCP47](http://tools.ietf.org/html/bcp47) language tags like `de-AT` are used
+  to denote the language.
 
 ---
 
@@ -677,6 +687,25 @@ http://www.w3.org/standards/semanticweb/ontology
 
 ---
 
+# What we gain from using RDF
+
+- Often times you don't need to model your domain as many areas are already
+developed by existing vocabularies.
+
+- RDF based data is highly interoperable.
+  - Independent of syntax.
+  - Unambiguous meaning of every single property.
+  - Minimal chance for naming collisions.
+
+- Data models are extensible as it is based on an
+[Open World Assumption](http://en.wikipedia.org/wiki/Open-world_assumption).
+
+<!--
+http://dbooth.org/2007/rdf-and-soa/rdf-and-soa-paper.htm
+-->
+
+---
+
 class: center, middle
 
 # Linked Data
@@ -696,6 +725,7 @@ class: center, middle
 <small>
 More:
 - https://www.youtube.com/watch?v=4x_xzT5eF5Q
+- http://www.w3.org/TR/ld-glossary/#linked-data
 </small>
 
 ---
@@ -751,7 +781,7 @@ To get from a Web of documents...
 
 - In the past, the Semantic Web was all about URIs.
 
-- In 2005 they made they gained Unicode support with IRIs.
+- In 2005 they gained Unicode support with IRIs.
 
 - URLs are just URIs/ IRIs which can be dereferenced.
 
@@ -759,7 +789,7 @@ To get from a Web of documents...
 
 # Linked Data Components
 
-- URIs (specifically, of the dereferenceable variety).
+- URIs/ IRIs (specifically, of the dereferenceable variety).
 
 - HTTP.
 
@@ -778,6 +808,8 @@ class: center, middle
 # JSON-LD
 
 <span class="red">JSON</span> <span class="red">L</span>inked <span class="red">D</span>ata; a serialization format for RDF.
+
+<br>
 
 > The desire for __better Web APIs__ is what motivated the creation of JSON-LD, not the Semantic Web.
 If you want to make the Semantic Web a reality, stop making the case for it and spend your
