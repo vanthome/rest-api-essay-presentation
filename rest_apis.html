@@ -518,12 +518,12 @@ In the form which has been procalimed for decades ‒ probably yes.
 
 <span class="red">R</span>esource <span class="red">D</span>escription <span class="red">F</span>ramework.
 
-- Effectively a data model for labeled, directed multi-graphs.
+- Technically a data model for labeled, directed multi-graphs.
 
 - There is a variety of serialization formats
 (e. g. RDF/XML, N3, Turtle, N-Triples, JSON-LD).
 
-- Consists of statements about “things” (Web resources)
+- RDF based data consists of statements about “things” (Web resources)
 in the form of subject-predicate-object expressions, also known as triples.
   - Statements can describe facts with literals,
 
@@ -537,7 +537,7 @@ http://www.uni-weimar.de/medien/webis/teaching/lecturenotes/web-technology/unit-
 # RDF Examples
 
 <small>
-With literals / or in natural language:
+With literals in natural language:
 
 | Subject           | Predicate        | Object                             |
 |-------------------|------------------|------------------------------------|
@@ -641,7 +641,7 @@ http://www.w3.org/standards/semanticweb/ontology
 
 ---
 
-# Some Established Vocabularies
+# Some Interesting Vocabularies
 
 .left-column[
 <small>
@@ -689,16 +689,20 @@ http://www.w3.org/standards/semanticweb/ontology
 
 # What we gain from using RDF
 
-- Often times you don't need to model your domain as many areas are already
-developed by existing vocabularies.
+- Often times you don't need to model your domain as their terms and relations
+are already defined by existing vocabularies.
 
 - RDF based data is highly interoperable.
   - Independent of syntax.
-  - Unambiguous meaning of every single property.
-  - Minimal chance for naming collisions.
+  - Independent of platform (operating system, application, programming language).
+  - Unambiguous meaning of every relation (property in JSON-LD).
+  - Minimal risk of naming collisions.
 
 - Data models are extensible as it is based on an
 [Open World Assumption](http://en.wikipedia.org/wiki/Open-world_assumption).
+
+- Allows the the construction of the digital equivalent of natural language
+sentences and thus machine interpretation.
 
 <!--
 http://dbooth.org/2007/rdf-and-soa/rdf-and-soa-paper.htm
