@@ -596,13 +596,48 @@ non-information resource - A resource that cannot be transmitted electronically.
 -->
 ---
 
-# Potential Values of Triple Elements
+# Possible Values of Triple Elements
 
 __Subject__: Only resources.
 
 __Predicate__: Only resources.
 
 __Object__: Resources or literals.
+
+---
+
+# Serialization Format Examples RDF/XML
+
+````
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <foaf:Person rdf:about="http://thomashoppe.me/">
+    <foaf:firstName>Thomas</foaf:firstName>
+    <foaf:lastName>Hoppe</foaf:lastName>
+    <foaf:workplaceHomepage>http://www.n-fuse.de</foaf:workplaceHomepage>
+  </foaf:Person>
+</rdf:RDF>
+````
+
+---
+
+# Serialization Format Examples Turtle/N3
+
+````
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://thomashoppe.me/> a foaf:Person ;
+    foaf:firstName "Thomas" ;
+    foaf:lastName "Hoppe" ;
+    foaf:workplaceHomepage "http://www.n-fuse.de" .
+````
 
 ---
 
@@ -615,6 +650,17 @@ __Object__: Resources or literals.
 - [BCP47](http://tools.ietf.org/html/bcp47) language tags like `de-AT` are used
   to denote the language.
 
+<br>
+RDF/XML:
+````
+<foaf:firstName xml:lang="DE">Thomas</foaf:firstName>
+````
+
+Turtle/ N3:
+````
+foaf:firstName "Thomas"@DE ;
+````
+
 ---
 
 # Vocabularies
@@ -626,7 +672,7 @@ __Comprising__:
 - Individuals (instances, objects),
 - Classes (concepts, types),
 - Properties (relations, roles),
-- Rules (axioms)
+- Rules (axioms).
 
 There are multiple vocabularies, to define vocabularies such as RDFS and OWL.
 
@@ -643,47 +689,60 @@ http://www.w3.org/standards/semanticweb/ontology
 
 # Some Interesting Vocabularies
 
-.left-column[
-<small>
-- rdf       http://www.w3.org/1999/02/22-rdf-syntax-ns#
-- rdfs      http://www.w3.org/2000/01/rdf-schema#
-- xsd       http://www.w3.org/2001/XMLSchema#
-- owl       http://www.w3.org/2002/07/owl#
-- skos      http://www.w3.org/2004/02/skos/core#
-- dir       http://dir.w3.org/directory/schema#
-- org       http://www.w3.org/ns/org#
-- rov       http://www.w3.org/ns/regorg#
-- dct       http://purl.org/dc/terms/
-- http      http://www.w3.org/2011/http#
-- httph     http://www.w3.org/2011/http-headers#
-- hydra     http://www.w3.org/ns/hydra/core#
-- cc        http://creativecommons.org/ns#
-- foaf      http://xmlns.com/foaf/0.1/
-- sioc      http://rdfs.org/sioc/ns#
-- geo       http://www.w3.org/2003/01/geo/wgs84_pos#
-- gn        http://www.geonames.org/ontology#
-</small>
-]
-.right-column[
-<small>
-- og        http://ogp.me/ns#
-- gr        http://purl.org/goodrelations/v1#
-- xro       http://purl.org/xro/ns#
-- dbo       http://dbpedia.org/ontology/
-- schema    http://schema.org/
-- tzont     http://www.w3.org/2006/timezone#
-- lingvo    http://www.lingvoj.org/ontology#
-- lvont     http://lexvo.org/ontology#
-- vs        http://www.w3.org/2003/06/sw-vocab-status/ns#
-- pto       http://www.productontology.org/id/
-- vann      http://purl.org/vocab/vann/
-- prov      http://www.w3.org/ns/prov#
-- doap      http://usefulinc.com/ns/doap#
-- voaf      http://purl.org/vocommons/voaf#
-- void      http://rdfs.org/ns/void#
-- adms      http://www.w3.org/ns/adms#
-</small>
-]
+<pre style="font-size: 0.55em;">
+PREFIX    IRI
+rdf       http://www.w3.org/1999/02/22-rdf-syntax-ns#
+rdfs      http://www.w3.org/2000/01/rdf-schema#
+xsd       http://www.w3.org/2001/XMLSchema#
+owl       http://www.w3.org/2002/07/owl#
+skos      http://www.w3.org/2004/02/skos/core#
+dir       http://dir.w3.org/directory/schema#
+org       http://www.w3.org/ns/org#
+rov       http://www.w3.org/ns/regorg#
+dct       http://purl.org/dc/terms/
+http      http://www.w3.org/2011/http#
+httph     http://www.w3.org/2011/http-headers#
+hydra     http://www.w3.org/ns/hydra/core#
+cc        http://creativecommons.org/ns#
+foaf      http://xmlns.com/foaf/0.1/
+sioc      http://rdfs.org/sioc/ns#
+geo       http://www.w3.org/2003/01/geo/wgs84_pos#
+gn        http://www.geonames.org/ontology#
+og        http://ogp.me/ns#
+gr        http://purl.org/goodrelations/v1#
+xro       http://purl.org/xro/ns#
+dbo       http://dbpedia.org/ontology/
+schema    http://schema.org/
+tzont     http://www.w3.org/2006/timezone#
+lingvo    http://www.lingvoj.org/ontology#
+lvont     http://lexvo.org/ontology#
+vs        http://www.w3.org/2003/06/sw-vocab-status/ns#
+pto       http://www.productontology.org/id/
+vann      http://purl.org/vocab/vann/
+prov      http://www.w3.org/ns/prov#
+doap      http://usefulinc.com/ns/doap#
+voaf      http://purl.org/vocommons/voaf#
+void      http://rdfs.org/ns/void#
+adms      http://www.w3.org/ns/adms#
+</pre>
+
+
+Consider those de-facto prefixes, check http://prefix.cc/.
+
+---
+
+# Where to get a Vocab for my Domain?!
+
+1. Check what other people already have modelled:
+  - [schema.org](schema.org) — from Google and other search engines,
+  - [http://lov.okfn.org/dataset/lov/](http://lov.okfn.org/dataset/lov/) —
+    Linked Open Vocabularies,
+  - [http://vocab.cc/](http://vocab.cc/) — RDF vocabulary search and lookup.
+
+2. Create your own one
+  - Just coin an IRI without having an actual vocab,
+  - RDFS (RDF Schema),
+  - OWL.
 
 ---
 
